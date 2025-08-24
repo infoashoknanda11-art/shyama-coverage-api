@@ -3,10 +3,13 @@ import cv2, numpy as np
 
 app = Flask(__name__)
 
-@app.get("/health")
+@app.get("/")            # <-- add this
+def index():
+    return {"ok": True, "msg": "Shyama Coverage API"}
+
+@app.get("/health")      # already present
 def health():
     return {"ok": True}
-
 def calc_coverage(image_bytes):
     arr = np.frombuffer(image_bytes, np.uint8)
     img = cv2.imdecode(arr, cv2.IMREAD_COLOR)
